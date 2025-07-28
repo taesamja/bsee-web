@@ -1,114 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EASY AI - 전자회로 용어 학습 코치</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fc;
-      color: #333;
-    }
-
-    header {
-      background-color: #0044cc;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-    }
-
-    section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-    }
-
-    .card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      flex: 1 1 250px;
-    }
-
-    .cta {
-      text-align: center;
-      margin-top: 3rem;
-    }
-
-    .cta a {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: #0044cc;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-
-    .cta a:hover {
-      background: #002e80;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #777;
-    }
-  </style>
+  <title>전자회로 용어 저장소</title>
 </head>
 <body>
+  <h1>📘 전자회로 용어</h1>
+  <input type="text" id="termInput" placeholder="용어를 입력하세요" />
+  <button onclick="addTerm()">저장</button>
 
-<header>
-  <h1>EASY AI</h1>
-  <p>내 손안의 전자회로 용어 맞춤형 학습 코치</p>
-</header>
+  <h2>📝 저장된 용어</h2>
+  <ul id="termList"></ul>
 
-<section>
-  <h2>📘 주요 기능</h2>
-  <div class="features">
-    <div class="card">
-      <h3>AI 용어 설명</h3>
-      <p>복잡한 전자회로 용어도 AI가 초보자 눈높이에 맞춰 쉽게 설명해줘요.</p>
-    </div>
-    <div class="card">
-      <h3>맞춤 퀴즈 생성</h3>
-      <p>학습한 내용을 기반으로 자동으로 퀴즈를 만들어 복습까지 한 번에!</p>
-    </div>
-    <div class="card">
-      <h3>단어장 & 진도 관리</h3>
-      <p>모르는 단어는 저장, 진도는 자동으로 관리돼요.</p>
-    </div>
-  </div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
 
-  <div class="cta">
-    <h2>📱 앱 출시 예정! 먼저 체험해보세요</h2>
-    <a href="#">데모 체험하기</a>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 EASY AI 팀. All rights reserved.
-</footer>
-
-  
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
