@@ -17,25 +17,41 @@
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  <script>
+    // 🔑 여기에 당신의 Firebase 구성 정보 입력
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUBcagozhLsxUtgr0bZ0ivy9VSUQJNI58",
+      authDomain: "bsee-web.firebaseapp.com",
+      databaseURL: "https://bsee-web-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "bsee-web",
+      storageBucket: "bsee-web.firebasestorage.app",
+      messagingSenderId: "816604434146",
+      appId: "1:816604434146:web:b62a3966d4d289e81498bb"
+    };
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDUBcagozhLsxUtgr0bZ0ivy9VSUQJNI58",
-    authDomain: "bsee-web.firebaseapp.com",
-    databaseURL: "https://bsee-web-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "bsee-web",
-    storageBucket: "bsee-web.firebasestorage.app",
-    messagingSenderId: "816604434146",
-    appId: "1:816604434146:web:b62a3966d4d289e81498bb"
-  };
+    // 🔌 Firebase 초기화
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
+    // ➕ 용어 저장 함수
+    function addTerm() {
+      const term = document.getElementById("termInput").value.trim();
+      if (term) {
+        db.ref("terms").push({ name: term });
+        document.getElementById("termInput").value = '';
+      }
+    }
+
+    // 📥 실시간 용어 목록 불러오기
+    db.ref("terms").on("value", snapshot => {
+      const list = document.getElementById("termList");
+      list.innerHTML = '';
+      snapshot.forEach(child => {
+        const li = document.createElement("li");
+        li.textContent = child.val().name;
+        list.appendChild(li);
+      });
+    });
+  </script>
 </body>
 </html>
