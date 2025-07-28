@@ -33,25 +33,9 @@
     const app = firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // ➕ 용어 저장 함수
-    function addTerm() {
-      const term = document.getElementById("termInput").value.trim();
-      if (term) {
-        db.ref("terms").push({ name: term });
-        document.getElementById("termInput").value = '';
-      }
-    }
-
-    // 📥 실시간 용어 목록 불러오기
-    db.ref("terms").on("value", snapshot => {
-      const list = document.getElementById("termList");
-      list.innerHTML = '';
-      snapshot.forEach(child => {
-        const li = document.createElement("li");
-        li.textContent = child.val().name;
-        list.appendChild(li);
-      });
-    });
+    // 데이터 쓰기 예시
+  db.ref("test").push({ message: "Hello Firebase" });
+    
   </script>
 </body>
 </html>
