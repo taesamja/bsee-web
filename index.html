@@ -13,12 +13,12 @@
   <h2>📝 저장된 용어</h2>
   <ul id="termList"></ul>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
+  <!-- ✅ Firebase SDK (v8 - 브라우저에서 firebase 전역 객체 제공) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <script>
-    // 🔑 여기에 당신의 Firebase 구성 정보 입력
+    // ✅ Firebase 구성
     const firebaseConfig = {
       apiKey: "AIzaSyDUBcagozhLsxUtgr0bZ0ivy9VSUQJNI58",
       authDomain: "bsee-web.firebaseapp.com",
@@ -29,13 +29,29 @@
       appId: "1:816604434146:web:b62a3966d4d289e81498bb"
     };
 
-    // 🔌 Firebase 초기화
-    const app = firebase.initializeApp(firebaseConfig);
+    // ✅ Firebase 초기화
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // 데이터 쓰기 예시
-  db.ref("test").push({ message: "Hello Firebase" });
-    
+    // ➕ 용어 저장 함수
+    function addTerm() {
+      const term = document.getElementById("termInput").value.trim();
+      if (term) {
+        db.ref("terms").push({ name: term });
+        document.getElementById("termInput").value = '';
+      }
+    }
+
+    // 📥 실시간 데이터 불러오기
+    db.ref("terms").on("value", (snapshot) => {
+      const list = document.getElementById("termList");
+      list.innerHTML = '';
+      snapshot.forEach((child) => {
+        const li = document.createElement("li");
+        li.textContent = child.val().name;
+        list.appendChild(li);
+      });
+    });
   </script>
 </body>
 </html>
