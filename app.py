@@ -5,7 +5,7 @@ import google.generativeai as genai
 
 # API 키 설정
 genai.configure(api_key="AIzaSyD_2LlbeBlfwWH-TLAT0_jecWWN0yiyidQ")
-model = genai.GenerativeModel("gemini-2.5-pro")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # DB 초기화
 conn = sqlite3.connect("pdf_qa.db")
@@ -25,7 +25,7 @@ def extract_pdf_text(uploaded_file):
 # 시험문제 출제
 def generate_quiz(pdf_text):
     prompt = f"""
-    다음 내용을 기반으로 객관식 시험문제 3개를 출제해 주세요. 각 문항은 다음 형식으로 작성해 주세요:
+    다음 내용을 기반으로 객관식 시험문제 5개를 출제해 주세요. 각 문항은 다음 형식으로 작성해 주세요:
 
     질문:
     1) 보기1
